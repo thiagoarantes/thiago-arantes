@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+
+.desktopIcon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  width: 80px;
+
+  &:hover {
+    background-color: rgba(0, 0, 132, 0.2);
+    border-radius: 5px;
+  }
+
+  .iconImage {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+    image-rendering: pixelated;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span {
+    font-size: 0.65em;
+    text-align: center;
+    line-height: 1.2;
+    color: $macos9-text-color;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  }
+}

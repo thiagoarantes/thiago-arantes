@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.messageBoxOverlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.messageBox {
+  background-color: $macos9-window-bg;
+  border: 2px solid $macos9-window-border;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
+  max-width: 300px;
+}

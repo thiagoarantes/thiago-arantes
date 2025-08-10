@@ -1,0 +1,173 @@
+@import "../../styles/variables.scss";
+
+.window {
+  position: absolute;
+  border: 1px solid $macos9-window-border;
+  background-color: $macos9-window-bg;
+  box-shadow: 4px 4px 0 rgb(43, 43, 43);
+  min-width: 250px;
+  min-height: 150px;
+  z-index: 10;
+  resize: both;
+  overflow: hidden;
+  font-size: 0.65em;
+
+  &.inactive {
+    box-shadow: 4px 4px 0 rgba(43, 43, 43, 0.5);
+    border: 1px solid rgba(43, 43, 43, 0.5);
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.5);
+      z-index: 999;
+    }
+
+    .windowTitlebar {
+      background: none;
+      color: $macos9-text-color;
+      border-bottom: 1px solid $macos9-button-bevel-dark;
+      padding-right: 21px;
+
+      .windowControlsLeft,
+      .windowControlsRight {
+        display: none;
+      }
+      .windowTitle {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.windowTitlebar {
+  background: url("/assets/window-title-bg.png") repeat-x center center;
+  box-shadow: inset -1px -1px 0 rgb(133, 133, 133);
+  height: 19px;
+  color: #000;
+  font-weight: bold;
+  cursor: grab;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  border-bottom: 1px solid $macos9-window-border;
+  font-size: 1em;
+  padding-right: 1px;
+}
+
+.windowTitle {
+  padding: 0 4px;
+  background-color: $macos9-window-bg;
+}
+
+.windowTitleIcon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.windowControlsLeft,
+.windowControlsRight {
+  display: flex;
+  gap: 2px;
+  background-color: $macos9-window-bg;
+}
+
+.windowControlsLeft {
+  padding: 0 4px 0 2px;
+}
+
+.windowControlsRight {
+  padding: 0 2px 0 6px;
+}
+
+.windowControlButton {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  color: #000;
+  line-height: 1;
+
+  &:active {
+    background-color: #eee;
+  }
+}
+
+.closeButton {
+  background: url("/assets/buttons/button-close.png") no-repeat center center;
+  border: none;
+  text-indent: -9999px;
+  &:hover {
+    background: url("/assets/buttons/button-close-hover.png") no-repeat center
+      center;
+  }
+}
+
+.maximizeButton {
+  background: url("/assets/buttons/button-maximize.png") no-repeat center center;
+  border: none;
+  text-indent: -9999px;
+  &:hover {
+    background: url("/assets/buttons/button-maximize-hover.png") no-repeat
+      center center;
+  }
+}
+
+.minimizeButton {
+  background: url("/assets/buttons/button-minimize.png") no-repeat center center;
+  border: none;
+  text-indent: -9999px;
+  &:hover {
+    background: url("/assets/buttons/button-minimize-hover.png") no-repeat
+      center center;
+  }
+}
+
+.windowContent {
+  padding: 10px;
+  overflow: auto;
+  height: calc(100% - 19px);
+  box-sizing: border-box;
+  box-shadow: inset -1px -2px 0 rgb(133, 133, 133);
+
+  h2 {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: $macos9-highlight;
+    text-decoration: underline;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+}

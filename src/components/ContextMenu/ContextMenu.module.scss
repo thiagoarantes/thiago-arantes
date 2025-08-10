@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+.contextMenu {
+  display: none;
+  position: absolute;
+  background-color: $macos9-menubar-bg;
+  min-width: 160px;
+  box-shadow: 1px 1px 0 rgb(155, 155, 155), inset 1px 1px 0 rgb(255, 255, 255),
+    inset -1px -1px 0 rgb(187, 187, 187);
+  border: 1px solid #000;
+  z-index: 100;
+  font-size: 0.65em;
+  padding: 1px;
+  user-select: none;
+}
+
+.contextMenuItem {
+  padding: 6px 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  &:hover {
+    background-color: $macos9-highlight;
+    color: #fff;
+  }
+}
+
+.contextMenuHr {
+  border: none;
+  border-top: 1px solid $macos9-separator-color;
+  box-shadow: inset 0 -1px 0 rgb(255, 255, 255),
+    inset 0 1px 0 rgb(187, 187, 187);
+  margin: 0;
+  height: 2px;
+}

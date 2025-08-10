@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Mac OS 9 Personal Site</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Top Menu Bar -->
+    <div class="menu-bar">
+      <div class="menu-item apple-logo">
+        <img src="_assets/icons/apple-logo.png" alt="Apple Logo" />
+      </div>
+      <div class="menu-item">
+        File
+        <div class="dropdown-content">
+          <a href="#" onclick="openWindow('new'); return false;">New Window</a>
+          <a
+            href="#"
+            onclick="showMessage('Open functionality is not implemented yet.'); return false;"
+            >Open...</a
+          >
+          <a
+            href="#"
+            onclick="showMessage('Save functionality is not implemented yet.'); return false;"
+            >Save</a
+          >
+          <a
+            href="#"
+            onclick="showMessage('Print functionality is not implemented yet.'); return false;"
+            >Print</a
+          >
+        </div>
+      </div>
+      <div class="menu-item">
+        Edit
+        <div class="dropdown-content">
+          <a
+            href="#"
+            onclick="showMessage('Cut functionality is not implemented yet.'); return false;"
+            >Cut</a
+          >
+          <a
+            href="#"
+            onclick="showMessage('Copy functionality is not implemented yet.'); return false;"
+            >Copy</a
+          >
+          <a
+            href="#"
+            onclick="showMessage('Paste functionality is not implemented yet.'); return false;"
+            >Paste</a
+          >
+        </div>
+      </div>
+      <div class="menu-item">
+        Help
+        <div class="dropdown-content">
+          <a href="#" onclick="openWindow('help'); return false;"
+            >About This Mac</a
+          >
+          <a
+            href="#"
+            onclick="showMessage('Help topics are not implemented yet.'); return false;"
+            >Help Topics</a
+          >
+        </div>
+      </div>
+      <div class="menu-item-spacer"></div>
+      <!-- Spacer to push date/time to right -->
+      <div class="menu-item" id="time-display"></div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icon" id="my-computer-icon">
+      <!-- Replaced img with a span and emoji for a more classic Mac feel -->
+      <img
+        src="_assets/icons/my-computer.png"
+        alt="My Computer"
+        class="icon-image"
+      />
+      <span>My Computer</span>
+    </div>
+
+    <div class="desktop-icon" id="about-me-icon">
+      <img src="_assets/icons/profile.png" alt="About Me" class="icon-image" />
+      <span>About Me</span>
+    </div>
+
+    <div class="desktop-icon" id="projects-icon">
+      <img src="_assets/icons/projects.png" alt="Projects" class="icon-image" />
+      <span>Projects</span>
+    </div>
+
+    <div class="desktop-icon" id="contact-me-icon">
+      <img
+        src="_assets/icons/contact-me.png"
+        alt="Contact Me"
+        class="icon-image"
+      />
+      <span>Contact Me</span>
+    </div>
+
+    <!-- Window Templates (hidden by default) -->
+    <template id="window-template">
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls-left">
+            <button
+              class="window-control-button close-button"
+              title="Close"
+            ></button>
+          </div>
+          <span class="window-title"
+            ><img class="window-title-icon" src="" alt="" />
+            <span>New Window</span></span
+          >
+          <div class="window-controls-right">
+            <button
+              class="window-control-button maximize-button"
+              title="Maximize"
+            ></button>
+            <button
+              class="window-control-button minimize-button"
+              title="Minimize"
+            ></button>
+          </div>
+        </div>
+        <div class="window-content">
+          <!-- Content goes here -->
+        </div>
+      </div>
+    </template>
+
+    <template id="about-me-content">
+      <h2>About Me</h2>
+      <p>
+        Hello! I'm [Your Name], a passionate individual interested in [Your
+        Interests/Field]. I enjoy [Hobby 1], [Hobby 2], and exploring new
+        technologies. This website is a tribute to the classic Mac OS 9, a
+        timeless operating system that shaped early computing experiences.
+      </p>
+      <p>
+        I built this site to showcase my [skills/projects] and share a bit about
+        myself in a unique, retro style. Feel free to explore the "desktop" and
+        open the various "applications" (windows) to learn more!
+      </p>
+      <button
+        class="macos9-button"
+        onclick="showMessage('You clicked the About Me button!');"
+      >
+        Learn More
+      </button>
+    </template>
+
+    <template id="projects-content">
+      <h2>My Projects</h2>
+      <p>Here are some of the projects I've been working on:</p>
+      <ul>
+        <li>
+          <b>Project Alpha:</b> A [brief description] utilizing [technologies].
+        </li>
+        <li>
+          <b>Project Beta:</b> An interactive [brief description] built with
+          [tools].
+        </li>
+        <li>
+          <b>Project Gamma:</b> Research into [topic] and its applications.
+        </li>
+      </ul>
+      <p>
+        Each project aims to solve a problem or explore a new concept, pushing
+        the boundaries of what's possible with code and creativity.
+      </p>
+      <button class="macos9-button" onclick="openWindow('project-details');">
+        View Details
+      </button>
+    </template>
+
+    <template id="contact-me-content">
+      <h2>Contact Me</h2>
+      <p>I'd love to hear from you! You can reach me via:</p>
+      <ul>
+        <li>
+          <b>Email:</b>
+          <a href="mailto:your.email@example.com">your.email@example.com</a>
+        </li>
+        <li>
+          <b>LinkedIn:</b>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank"
+            >linkedin.com/in/yourprofile</a
+          >
+        </li>
+        <li>
+          <b>GitHub:</b>
+          <a href="https://github.com/yourusername" target="_blank"
+            >github.com/yourusername</a
+          >
+        </li>
+      </ul>
+      <p>
+        Feel free to send a message or connect on social media. I'm always open
+        to new opportunities and collaborations!
+      </p>
+      <button
+        class="macos9-button"
+        onclick="showMessage('You clicked the Contact Me button!');"
+      >
+        Send Message
+      </button>
+    </template>
+
+    <template id="help-content">
+      <h2>About This Mac</h2>
+      <p><b>Mac OS 9 Style Personal Website</b></p>
+      <p>Version 1.1 (Build 20250808)</p>
+      <p>
+        This is a personal website inspired by the classic Apple Macintosh
+        operating system, Mac OS 9. It features draggable windows, iconic
+        interface elements, and a retro aesthetic.
+      </p>
+      <p>
+        &copy; 2025 [Your Name]. All rights reserved. Macintosh, Mac OS, and the
+        Apple logo are trademarks of Apple Inc.
+      </p>
+    </template>
+
+    <template id="project-details-content">
+      <h2>Project Details</h2>
+      <p>
+        This is a placeholder for project details. Here, you would typically
+        find more in-depth information about a specific project, including:
+      </p>
+      <ul>
+        <li>Project Goals and Objectives</li>
+        <li>Technologies Used</li>
+        <li>Challenges Faced and Solutions</li>
+        <li>Screenshots or Demos</li>
+        <li>Links to Live Demos or Repositories</li>
+      </ul>
+      <p>You can customize this content for each of your projects.</p>
+      <button
+        class="macos9-button"
+        onclick="showMessage('No more details available for this demo.');"
+      >
+        Back to Projects
+      </button>
+    </template>
+
+    <!-- Context Menu (hidden initially) -->
+    <div id="context-menu" class="context-menu">
+      <div
+        class="context-menu-item"
+        onclick="openWindow('about'); closeContextMenu();"
+      >
+        Open About Me
+      </div>
+      <div
+        class="context-menu-item"
+        onclick="openWindow('projects'); closeContextMenu();"
+      >
+        Open Projects
+      </div>
+      <div
+        class="context-menu-item"
+        onclick="openWindow('contact'); closeContextMenu();"
+      >
+        Open Contact
+      </div>
+      <hr class="context-menu-hr" />
+      <div
+        class="context-menu-item"
+        onclick="orderIconsByName(); closeContextMenu();"
+      >
+        Order Icons by Name
+      </div>
+      <hr class="context-menu-hr" />
+      <div
+        class="context-menu-item"
+        onclick="showMessage('Get Info functionality is not implemented yet.'); closeContextMenu();"
+      >
+        Get Info
+      </div>
+    </div>
+
+    <!-- Custom Message Box (instead of alert) -->
+    <div id="message-box-overlay" class="message-box-overlay">
+      <div id="message-box" class="message-box">
+        <p id="message-box-content"></p>
+        <button class="macos9-button" onclick="hideMessage();">OK</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

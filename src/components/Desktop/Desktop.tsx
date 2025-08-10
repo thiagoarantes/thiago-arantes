@@ -41,28 +41,28 @@ const Desktop: React.FC = () => {
       icon: "/assets/icons/my-computer.png",
       label: "My Computer",
       top: 50,
-      left: 20,
+      right: 20,
     },
     {
       id: "about-me",
       icon: "/assets/icons/profile.png",
       label: "About Me",
       top: 150,
-      left: 20,
+      right: 20,
     },
     {
       id: "projects",
       icon: "/assets/icons/projects.png",
       label: "My Projects",
       top: 250,
-      left: 20,
+      right: 20,
     },
     {
       id: "contact-me",
       icon: "/assets/icons/contact-me.png",
       label: "Contact Me",
       top: 350,
-      left: 20,
+      right: 20,
     },
   ]);
   const [draggingIcon, setDraggingIcon] = useState<string | null>(null);
@@ -79,7 +79,7 @@ const Desktop: React.FC = () => {
             icon.id === draggingIcon
               ? {
                   ...icon,
-                  left: e.clientX - dragOffset.x,
+                  right: window.innerWidth - (e.clientX - dragOffset.x),
                   top: e.clientY - dragOffset.y,
                 }
               : icon
@@ -109,18 +109,26 @@ const Desktop: React.FC = () => {
       .map((icon, index) => ({
         ...icon,
         top: 50 + index * 100,
-        left: 20,
+        right: 20,
       }));
     setDesktopIcons(sortedIcons);
   };
 
   const handleIconMouseDown = (id: string, e: React.MouseEvent) => {
-    if (e.button !== 0) return; // Only drag with left mouse button
+    if (e.button !== 0) {
+      return; // Only drag with left mouse button
+    }
+
     e.preventDefault(); // Prevent text selection
+
     const icon = desktopIcons.find((icon) => icon.id === id);
+
     if (icon) {
-      const offsetX = e.clientX - icon.left;
+      // For right positioning, we need to calculate from the right edge of the viewport
+      const rightEdgePosition = window.innerWidth - icon.right;
+      const offsetX = e.clientX - rightEdgePosition;
       const offsetY = e.clientY - icon.top;
+
       setDragOffset({ x: offsetX, y: offsetY });
       setDraggingIcon(id);
     }
@@ -220,7 +228,7 @@ const Desktop: React.FC = () => {
           icon={icon.icon}
           label={icon.label}
           top={icon.top}
-          left={icon.left}
+          right={icon.right}
           onDoubleClick={() => handleIconDoubleClick(icon.id)}
           onMouseDown={(e) => handleIconMouseDown(icon.id, e)}
           isDragging={draggingIcon === icon.id}

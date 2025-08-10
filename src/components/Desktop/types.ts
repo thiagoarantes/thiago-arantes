@@ -3,5 +3,5 @@ export interface DesktopIcon {
   icon: string;
   label: string;
   top: number;
-  left: number;
+  right: number;
 }

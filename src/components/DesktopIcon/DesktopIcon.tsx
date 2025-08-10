@@ -8,7 +8,7 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
   icon,
   label,
   top,
-  left,
+  right,
   onDoubleClick,
   onMouseDown,
   isDragging = false,
@@ -17,7 +17,7 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
     <div
       className={cn(styles.desktopIcon, { [styles.dragging]: isDragging })}
       id={id}
-      style={{ top: top, left: left }}
+      style={{ top, right }}
       onDoubleClick={onDoubleClick}
       onMouseDown={onMouseDown}
     >

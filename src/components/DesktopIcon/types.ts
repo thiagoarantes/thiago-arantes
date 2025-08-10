@@ -3,7 +3,7 @@ export interface DesktopIconProps {
   icon: string;
   label: string;
   top: number;
-  left: number;
+  right: number;
   onDoubleClick: () => void;
   onMouseDown: (e: React.MouseEvent) => void;
   isDragging?: boolean;

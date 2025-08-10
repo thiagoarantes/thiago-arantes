@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "../../contexts/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import ProjectDetails from "../ProjectDetails/ProjectDetails";
 import styles from "./Projects.module.scss";
 

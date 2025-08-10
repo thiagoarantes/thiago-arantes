@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { AppWindow } from "./types";
 import { AppContext } from "./AppContext";
 import MessageBox from "../components/MessageBox/MessageBox";
 import Window from "../components/Window/Window";
+import AboutMe from "../components/AboutMe/AboutMe";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -11,60 +13,61 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [activeWindow, setActiveWindow] = useState<string | null>(null);
   const [messageBox, setMessageBox] = useState<string | null>(null);
   const [windowZIndex, setWindowZIndex] = useState(10); // Keep track of window z-index
-  const [backgroundColor, setBackgroundColor] = useState("#ccccff"); // Default macOS 9 background
+  const [backgroundColor, setBackgroundColor] = useLocalStorage(
+    "macos9-background-color",
+    "#ccccff"
+  ); // Persisted background color
 
-  const openWindow = (
-    id: string,
-    title: string,
-    content: React.ReactNode,
-    icon?: string
-  ) => {
-    if (windows.find((w) => w.id === id)) {
-      // If window already exists, bring it to front and make it active
+  const openWindow = useCallback(
+    (id: string, title: string, content: React.ReactNode, icon?: string) => {
+      if (windows.find((w) => w.id === id)) {
+        // If window already exists, bring it to front and make it active
+        const newZIndex = windowZIndex + 1;
+        setWindowZIndex(newZIndex);
+        setWindows(
+          windows.map((w) => (w.id === id ? { ...w, zIndex: newZIndex } : w))
+        );
+        setActiveWindow(id);
+        return;
+      }
+
+      // Generate random position like in the original
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const menuBarHeight = 24;
+      const initialWidth = 500;
+      const initialHeight = 350;
+
+      let posX = Math.random() * (viewportWidth - initialWidth - 40) + 20;
+      let posY =
+        Math.random() * (viewportHeight - initialHeight - menuBarHeight - 40) +
+        menuBarHeight +
+        20;
+
+      // Clamp positions to ensure they are within the visible area
+      posX = Math.max(20, Math.min(posX, viewportWidth - initialWidth - 20));
+      posY = Math.max(
+        menuBarHeight + 20,
+        Math.min(posY, viewportHeight - initialHeight - 20)
+      );
+
       const newZIndex = windowZIndex + 1;
       setWindowZIndex(newZIndex);
-      setWindows(
-        windows.map((w) => (w.id === id ? { ...w, zIndex: newZIndex } : w))
-      );
+      setWindows([
+        ...windows,
+        {
+          id,
+          title,
+          content,
+          icon,
+          position: { x: posX, y: posY },
+          zIndex: newZIndex,
+        },
+      ]);
       setActiveWindow(id);
-      return;
-    }
-
-    // Generate random position like in the original
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const menuBarHeight = 24;
-    const initialWidth = 500;
-    const initialHeight = 350;
-
-    let posX = Math.random() * (viewportWidth - initialWidth - 40) + 20;
-    let posY =
-      Math.random() * (viewportHeight - initialHeight - menuBarHeight - 40) +
-      menuBarHeight +
-      20;
-
-    // Clamp positions to ensure they are within the visible area
-    posX = Math.max(20, Math.min(posX, viewportWidth - initialWidth - 20));
-    posY = Math.max(
-      menuBarHeight + 20,
-      Math.min(posY, viewportHeight - initialHeight - 20)
-    );
-
-    const newZIndex = windowZIndex + 1;
-    setWindowZIndex(newZIndex);
-    setWindows([
-      ...windows,
-      {
-        id,
-        title,
-        content,
-        icon,
-        position: { x: posX, y: posY },
-        zIndex: newZIndex,
-      },
-    ]);
-    setActiveWindow(id);
-  };
+    },
+    [windows, windowZIndex]
+  );
 
   const focusWindow = (id: string) => {
     // Bring the focused window to front by giving it a new higher z-index
@@ -94,9 +97,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   // Apply background color to body element
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style.backgroundColor = backgroundColor;
   }, [backgroundColor]);
+
+  // Open About Me window on app load
+  useEffect(() => {
+    openWindow(
+      "about-me",
+      "About Me",
+      <AboutMe />,
+      "/assets/icons/profile.png"
+    );
+  }, [openWindow]);
 
   return (
     <AppContext.Provider

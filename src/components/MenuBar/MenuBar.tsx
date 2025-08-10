@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAppContext } from "../../contexts/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./MenuBar.module.scss";
 import type { MenuBarProps } from "./types";
 import cn from "classnames";

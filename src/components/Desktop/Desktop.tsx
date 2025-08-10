@@ -7,7 +7,7 @@ import MyComputer from "../MyComputer/MyComputer";
 import MenuBar from "../MenuBar/MenuBar";
 import Help from "../Help/Help";
 import ContextMenu from "../ContextMenu/ContextMenu";
-import { useAppContext } from "../../contexts/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./Desktop.module.scss";
 import type { DesktopIcon as DesktopIconType } from "./types";
 

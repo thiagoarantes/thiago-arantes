@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import cn from "classnames";
-import { useAppContext } from "../../contexts/useAppContext";
+import { useAppContext } from "../../hooks/useAppContext";
 import AboutMe from "../AboutMe/AboutMe";
 import Projects from "../Projects/Projects";
 import ContactMe from "../ContactMe/ContactMe";

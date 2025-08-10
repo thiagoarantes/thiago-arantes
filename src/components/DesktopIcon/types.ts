@@ -6,4 +6,5 @@ export interface DesktopIconProps {
   left: number;
   onDoubleClick: () => void;
   onMouseDown: (e: React.MouseEvent) => void;
+  isDragging?: boolean;
 }

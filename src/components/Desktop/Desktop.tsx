@@ -189,7 +189,12 @@ const Desktop: React.FC = () => {
       showMessage("Paste functionality is not implemented yet.");
     }
     if (menu === "help" && item === "about") {
-      openWindow("help", "About This Mac", <Help />);
+      openWindow(
+        "help",
+        "About This Mac",
+        <Help />,
+        "/assets/icons/finder.png"
+      );
     }
     if (menu === "help" && item === "topics") {
       showMessage("Help topics are not implemented yet.");
@@ -218,6 +223,7 @@ const Desktop: React.FC = () => {
           left={icon.left}
           onDoubleClick={() => handleIconDoubleClick(icon.id)}
           onMouseDown={(e) => handleIconMouseDown(icon.id, e)}
+          isDragging={draggingIcon === icon.id}
         />
       ))}
       {contextMenu && (

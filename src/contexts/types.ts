@@ -15,4 +15,6 @@ export interface AppContextType {
     icon?: string
   ) => void;
   showMessage: (message: string) => void;
+  setBackgroundColor: (color: string) => void;
+  backgroundColor: string;
 }

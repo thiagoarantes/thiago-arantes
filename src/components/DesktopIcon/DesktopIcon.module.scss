@@ -15,6 +15,11 @@
     border-radius: 5px;
   }
 
+  &.dragging {
+    background-color: rgba(0, 0, 132, 0.2);
+    border-radius: 5px;
+  }
+
   .iconImage {
     width: 40px;
     height: 40px;

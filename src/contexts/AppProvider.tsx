@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import type { AppWindow } from "./types";
 import { AppContext } from "./AppContext";
 import MessageBox from "../components/MessageBox/MessageBox";
@@ -11,6 +11,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [activeWindow, setActiveWindow] = useState<string | null>(null);
   const [messageBox, setMessageBox] = useState<string | null>(null);
   const [windowZIndex, setWindowZIndex] = useState(10); // Keep track of window z-index
+  const [backgroundColor, setBackgroundColor] = useState("#ccccff"); // Default macOS 9 background
 
   const openWindow = (
     id: string,
@@ -92,8 +93,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     setMessageBox(null);
   };
 
+  // Apply background color to body element
+  React.useEffect(() => {
+    document.body.style.backgroundColor = backgroundColor;
+  }, [backgroundColor]);
+
   return (
-    <AppContext.Provider value={{ openWindow, showMessage }}>
+    <AppContext.Provider
+      value={{ openWindow, showMessage, setBackgroundColor, backgroundColor }}
+    >
       {children}
       {windows.map((win) => (
         <Window

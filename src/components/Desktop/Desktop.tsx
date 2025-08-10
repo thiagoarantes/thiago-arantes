@@ -40,28 +40,28 @@ const Desktop: React.FC = () => {
       id: "my-computer",
       icon: "/assets/icons/my-computer.png",
       label: "My Computer",
-      top: 70,
+      top: 50,
       left: 20,
     },
     {
       id: "about-me",
       icon: "/assets/icons/profile.png",
       label: "About Me",
-      top: 170,
+      top: 150,
       left: 20,
     },
     {
       id: "projects",
       icon: "/assets/icons/projects.png",
       label: "My Projects",
-      top: 270,
+      top: 250,
       left: 20,
     },
     {
       id: "contact-me",
       icon: "/assets/icons/contact-me.png",
       label: "Contact Me",
-      top: 370,
+      top: 350,
       left: 20,
     },
   ]);
@@ -108,7 +108,7 @@ const Desktop: React.FC = () => {
       .sort((a, b) => a.label.localeCompare(b.label))
       .map((icon, index) => ({
         ...icon,
-        top: 70 + index * 100,
+        top: 50 + index * 100,
         left: 20,
       }));
     setDesktopIcons(sortedIcons);

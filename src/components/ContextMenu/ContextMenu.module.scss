@@ -1,5 +1,7 @@
 @import "../../styles/variables.scss";
 
+$color-grid-size: 60px;
+
 .contextMenu {
   display: none;
   position: absolute;
@@ -35,6 +37,19 @@
 
 .submenuParent {
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 4px;
+}
+
+.submenuArrow {
+  width: 6px;
+  height: 12px;
+}
+
+.submenuParent:hover .submenuArrow {
+  content: url("/assets/arrow-hover.png");
 }
 
 .colorSubmenu {
@@ -51,37 +66,20 @@
 
 .colorGrid {
   display: grid;
-  grid-template-columns: repeat(11, 20px);
-  gap: 2px;
+  grid-template-columns: repeat(3, $color-grid-size);
+  gap: 6px;
   width: fit-content;
 }
 
 .colorSwatch {
-  width: 20px;
-  height: 20px;
+  width: $color-grid-size;
+  height: calc($color-grid-size / 3);
   border: 1px solid #000;
   cursor: pointer;
   box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
 
   &:hover {
-    border: 2px solid #fff;
+    border: 1px solid #fff;
     box-shadow: 0 0 0 1px #000, inset 1px 1px 0 rgba(255, 255, 255, 0.5);
-  }
-}
-
-.currentColor {
-  grid-column: 1 / -1;
-  width: auto;
-  height: 16px;
-  margin-bottom: 4px;
-
-  &:before {
-    content: "Current";
-    display: block;
-    font-size: 10px;
-    color: #000;
-    text-align: center;
-    line-height: 16px;
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
   }
 }

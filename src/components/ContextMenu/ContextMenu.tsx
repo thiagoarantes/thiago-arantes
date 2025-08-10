@@ -1,37 +1,36 @@
 import { forwardRef, useState } from "react";
+import cn from "classnames";
 import { useAppContext } from "../../contexts/useAppContext";
 import AboutMe from "../AboutMe/AboutMe";
 import Projects from "../Projects/Projects";
 import ContactMe from "../ContactMe/ContactMe";
 import styles from "./ContextMenu.module.scss";
 import type { ContextMenuProps } from "./types";
+import MyComputer from "../MyComputer/MyComputer";
 
 // Color palette based on the attached image
 const colorPalette = [
-  // Top row
-  "#5B84BA",
-  "#5C9B8A",
-  "#BA7B5B",
   "#BA5B5B",
-  "#5BBA6B",
-  "#5B5BBA",
-  "#9BBA5B",
-  "#4A7C59",
-  "#5B7BBA",
-  "#BA5BBA",
-  "#BA9B5B",
-  // Bottom row
-  "#9BBA5B",
-  "#BA5BBA",
   "#FF7B43",
-  "#8B6B47",
-  "#4B7BFF",
-  "#666666",
   "#FFBF43",
+  "#9BBA5B",
+  "#9BBA5B",
+  "#5BBA6B",
+  "#5C9B8A",
   "#5B8B7B",
+  "#4A7C59",
+  "#BA7B5B",
+  "#8B6B47",
+  "#BA5BBA",
+  "#5B5BBA",
+  "#5B7BBA",
+  "#CCCCFF",
+  "#4B7BFF",
   "#43BFFF",
+  "#5B84BA",
+  "#BA9B5B",
+  "#666666",
   "#000000",
-  "#ccccff",
 ];
 
 const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
@@ -42,6 +41,14 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
     const handleOpen = (type: string) => {
       onClose();
       switch (type) {
+        case "my-computer":
+          openWindow(
+            "my-computer",
+            "My Computer",
+            <MyComputer />,
+            "/assets/icons/my-computer.png"
+          );
+          break;
         case "about":
           openWindow(
             "about-me",
@@ -73,7 +80,6 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
 
     const handleColorSelect = (color: string) => {
       setBackgroundColor(color);
-      onClose();
     };
 
     return (
@@ -82,6 +88,14 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
         className={styles.contextMenu}
         style={{ top: y, left: x, display: "block" }}
       >
+        <div
+          className={styles.contextMenuItem}
+          onClick={() => {
+            handleOpen("my-computer");
+          }}
+        >
+          Open My Computer
+        </div>
         <div
           className={styles.contextMenuItem}
           onClick={() => handleOpen("about")}
@@ -112,25 +126,25 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
         </div>
         <hr className={styles.contextMenuHr} />
         <div
-          className={`${styles.contextMenuItem} ${styles.submenuParent}`}
+          className={cn(styles.contextMenuItem, styles.submenuParent)}
           onMouseEnter={() => setShowColorSubmenu(true)}
           onMouseLeave={() => setShowColorSubmenu(false)}
         >
           Background Color
+          <img
+            src="/assets/arrow.png"
+            alt=">"
+            className={styles.submenuArrow}
+          />
           {showColorSubmenu && (
             <div className={styles.colorSubmenu}>
               <div className={styles.colorGrid}>
-                {/* Add current color at the top */}
-                <div
-                  className={`${styles.colorSwatch} ${styles.currentColor}`}
-                  style={{ backgroundColor }}
-                  onClick={() => handleColorSelect(backgroundColor)}
-                  title="Current Color"
-                />
                 {colorPalette.map((color, index) => (
                   <div
                     key={index}
-                    className={styles.colorSwatch}
+                    className={cn(styles.colorSwatch, {
+                      [styles.selectedColor]: color === backgroundColor,
+                    })}
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorSelect(color)}
                     title={color}
@@ -141,8 +155,11 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
           )}
         </div>
         <hr className={styles.contextMenuHr} />
-        <div className={styles.contextMenuItem} onClick={onClose}>
-          Get Info
+        <div
+          className={styles.contextMenuItem}
+          onClick={() => handleOpen("about")}
+        >
+          About This Mac
         </div>
       </div>
     );

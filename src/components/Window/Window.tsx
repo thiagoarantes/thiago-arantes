@@ -20,6 +20,7 @@ const Window: React.FC<WindowProps> = ({
   const [position, setPosition] = useState(initialPosition);
   const [size, setSize] = useState(initialSize);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [originalState, setOriginalState] = useState({
     x: initialPosition.x,
     y: initialPosition.y,
@@ -43,11 +44,16 @@ const Window: React.FC<WindowProps> = ({
     };
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseDown = () => {
     onFocus();
   };
 
   const handleMaximize = () => {
+    if (isMinimized) {
+      handleMinimize();
+      return;
+    }
+
     if (isMaximized) {
       // Restore
       setPosition({ x: originalState.x, y: originalState.y });
@@ -72,7 +78,15 @@ const Window: React.FC<WindowProps> = ({
   };
 
   const handleMinimize = () => {
-    onClose(); // For now, minimize just closes the window like in original
+    const newIsMinimized = !isMinimized;
+
+    setIsMinimized((current) => !current);
+
+    if (newIsMinimized) {
+      setSize({ width: initialSize.width, height: 20 });
+    } else {
+      setSize({ width: initialSize.width, height: initialSize.height });
+    }
   };
 
   const handleMouseMove = useCallback(
@@ -115,6 +129,38 @@ const Window: React.FC<WindowProps> = ({
     setIsDragging(false);
   };
 
+  // Track manual resize via CSS resize and update state
+  useEffect(() => {
+    if (!windowRef.current || disableResize) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+
+        setSize({ width, height });
+
+        if (height <= 20) {
+          setIsMinimized(true);
+        }
+
+        // Update original state for maximize functionality (only if not maximized)
+        if (!isMaximized) {
+          setOriginalState((prev) => ({
+            ...prev,
+            width,
+            height,
+          }));
+        }
+      }
+    });
+
+    resizeObserver.observe(windowRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [disableResize, isMaximized]);
+
   useEffect(() => {
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
@@ -137,6 +183,7 @@ const Window: React.FC<WindowProps> = ({
       className={cn(styles.window, {
         [styles.inactive]: !isActive,
         [styles.noResize]: disableResize,
+        [styles.minimized]: isMinimized,
       })}
       style={{
         left: position.x,
@@ -189,7 +236,13 @@ const Window: React.FC<WindowProps> = ({
           ></button>
         </div>
       </div>
-      <div className={styles.windowContent}>{children}</div>
+      <div
+        className={cn(styles.windowContent, {
+          [styles.minimized]: isMinimized,
+        })}
+      >
+        {children}
+      </div>
     </div>
   );
 };

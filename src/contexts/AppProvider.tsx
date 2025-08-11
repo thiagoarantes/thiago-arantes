@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import type { AppWindow } from "./types";
 import { AppContext } from "./AppContext";
 import MessageBox from "../components/MessageBox/MessageBox";
@@ -17,6 +17,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     "macos9-background-color",
     "#ccccff"
   ); // Persisted background color
+  const hasOpenedInitialWindow = useRef(false);
 
   const openWindow = useCallback(
     (id: string, title: string, content: React.ReactNode, icon?: string) => {
@@ -72,6 +73,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const focusWindow = (id: string) => {
     // Bring the focused window to front by giving it a new higher z-index
     const newZIndex = windowZIndex + 1;
+
     setWindowZIndex(newZIndex);
     setWindows(
       windows.map((w) => (w.id === id ? { ...w, zIndex: newZIndex } : w))
@@ -81,6 +83,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const closeWindow = (id: string) => {
     setWindows(windows.filter((w) => w.id !== id));
+
     if (activeWindow === id) {
       setActiveWindow(
         windows.length > 1 ? windows[windows.length - 2].id : null
@@ -101,14 +104,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     document.body.style.backgroundColor = backgroundColor;
   }, [backgroundColor]);
 
-  // Open About Me window on app load
+  // Open About Me window on app load (only once)
   useEffect(() => {
-    openWindow(
-      "about-me",
-      "About Me",
-      <AboutMe />,
-      "/assets/icons/profile.png"
-    );
+    if (!hasOpenedInitialWindow.current) {
+      hasOpenedInitialWindow.current = true;
+      openWindow(
+        "about-me",
+        "About Me",
+        <AboutMe />,
+        "/assets/icons/profile.png"
+      );
+    }
   }, [openWindow]);
 
   return (

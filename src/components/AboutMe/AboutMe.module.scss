@@ -1,4 +1,4 @@
-@import "../../styles/buttons.scss";
+@use "../../styles/buttons.scss" as *;
 
 // No specific styles for AboutMe, but we can keep the file for consistency.
 // The button styles are imported from the shared buttons.scss file.

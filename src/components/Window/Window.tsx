@@ -150,7 +150,10 @@ const Window: React.FC<WindowProps> = ({
           <button
             className={cn(styles.windowControlButton, styles.closeButton)}
             title="Close"
-            onClick={onClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
           ></button>
         </div>
         <span className={styles.windowTitle}>
@@ -163,12 +166,18 @@ const Window: React.FC<WindowProps> = ({
           <button
             className={cn(styles.windowControlButton, styles.maximizeButton)}
             title="Maximize"
-            onClick={handleMaximize}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMaximize();
+            }}
           ></button>
           <button
             className={cn(styles.windowControlButton, styles.minimizeButton)}
             title="Minimize"
-            onClick={handleMinimize}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMinimize();
+            }}
           ></button>
         </div>
       </div>

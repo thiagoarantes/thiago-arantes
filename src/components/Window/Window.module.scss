@@ -12,9 +12,14 @@
   overflow: hidden;
   font-size: 0.65em;
 
+  &.noResize {
+    resize: none;
+  }
+
   &.inactive {
     box-shadow: 4px 4px 0 rgba(43, 43, 43, 0.5);
     border: 1px solid rgba(43, 43, 43, 0.5);
+    resize: none;
 
     &:after {
       content: "";
@@ -121,9 +126,14 @@
   background: url("/assets/buttons/button-maximize.png") no-repeat center center;
   border: none;
   text-indent: -9999px;
-  &:hover {
+  &:hover:not(.disabled) {
     background: url("/assets/buttons/button-maximize-hover.png") no-repeat
       center center;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -170,4 +180,8 @@
   li {
     margin-bottom: 5px;
   }
+}
+
+.noResize .windowContent {
+  padding: 0;
 }

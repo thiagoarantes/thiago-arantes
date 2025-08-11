@@ -7,6 +7,7 @@ import MyComputer from "../MyComputer/MyComputer";
 import MenuBar from "../MenuBar/MenuBar";
 import Help from "../Help/Help";
 import ContextMenu from "../ContextMenu/ContextMenu";
+import Earth from "../Earth/Earth";
 import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./Desktop.module.scss";
 import type { DesktopIcon as DesktopIconType } from "./types";
@@ -62,6 +63,13 @@ const Desktop: React.FC = () => {
       icon: "/assets/icons/contact-me.png",
       label: "Contact Me",
       top: 350,
+      right: 20,
+    },
+    {
+      id: "earth",
+      icon: "/assets/icons/earth.png",
+      label: "Earth",
+      top: 450,
       right: 20,
     },
   ]);
@@ -166,6 +174,16 @@ const Desktop: React.FC = () => {
           "My Computer",
           <MyComputer />,
           "/assets/icons/my-computer.png"
+        );
+        break;
+      case "earth":
+        openWindow(
+          "earth",
+          "Earth",
+          <Earth />,
+          "/assets/icons/earth.png",
+          { width: 650, height: 700 }, // Size to accommodate 650x650 canvas
+          true // Disable resize
         );
         break;
       default:

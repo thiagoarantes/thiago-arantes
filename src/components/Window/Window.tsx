@@ -12,17 +12,19 @@ const Window: React.FC<WindowProps> = ({
   onFocus,
   isActive,
   initialPosition = { x: 50, y: 50 },
+  initialSize = { width: 500, height: 350 },
   zIndex = 10,
+  disableResize = false,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState(initialPosition);
-  const [size, setSize] = useState({ width: 500, height: 350 });
+  const [size, setSize] = useState(initialSize);
   const [isMaximized, setIsMaximized] = useState(false);
   const [originalState, setOriginalState] = useState({
     x: initialPosition.x,
     y: initialPosition.y,
-    width: 500,
-    height: 350,
+    width: initialSize.width,
+    height: initialSize.height,
   });
   const windowRef = useRef<HTMLDivElement>(null);
   const dragStartPos = useRef({ x: 0, y: 0 });
@@ -132,7 +134,10 @@ const Window: React.FC<WindowProps> = ({
     <div
       ref={windowRef}
       id={id}
-      className={cn(styles.window, { [styles.inactive]: !isActive })}
+      className={cn(styles.window, {
+        [styles.inactive]: !isActive,
+        [styles.noResize]: disableResize,
+      })}
       style={{
         left: position.x,
         top: position.y,
@@ -164,12 +169,15 @@ const Window: React.FC<WindowProps> = ({
         </span>
         <div className={styles.windowControlsRight}>
           <button
-            className={cn(styles.windowControlButton, styles.maximizeButton)}
+            className={cn(styles.windowControlButton, styles.maximizeButton, {
+              [styles.disabled]: disableResize,
+            })}
             title="Maximize"
             onClick={(e) => {
               e.stopPropagation();
-              handleMaximize();
+              if (!disableResize) handleMaximize();
             }}
+            disabled={disableResize}
           ></button>
           <button
             className={cn(styles.windowControlButton, styles.minimizeButton)}

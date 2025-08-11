@@ -20,7 +20,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const hasOpenedInitialWindow = useRef(false);
 
   const openWindow = useCallback(
-    (id: string, title: string, content: React.ReactNode, icon?: string) => {
+    (
+      id: string,
+      title: string,
+      content: React.ReactNode,
+      icon?: string,
+      size?: { width: number; height: number },
+      disableResize?: boolean
+    ) => {
       if (windows.find((w) => w.id === id)) {
         // If window already exists, bring it to front and make it active
         const newZIndex = windowZIndex + 1;
@@ -36,8 +43,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const menuBarHeight = 24;
-      const initialWidth = 500;
-      const initialHeight = 350;
+      const initialWidth = size?.width || 500;
+      const initialHeight = size?.height || 350;
 
       let posX = Math.random() * (viewportWidth - initialWidth - 40) + 20;
       let posY =
@@ -62,7 +69,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
           content,
           icon,
           position: { x: posX, y: posY },
+          size: { width: initialWidth, height: initialHeight },
           zIndex: newZIndex,
+          disableResize,
         },
       ]);
       setActiveWindow(id);
@@ -132,7 +141,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
           onFocus={() => focusWindow(win.id)}
           isActive={activeWindow === win.id}
           initialPosition={win.position}
+          initialSize={win.size}
           zIndex={win.zIndex}
+          disableResize={win.disableResize}
         >
           {win.content}
         </Window>

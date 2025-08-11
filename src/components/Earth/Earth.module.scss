@@ -1,0 +1,41 @@
+@use "../../styles/variables.scss" as *;
+
+.earthContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: $macos9-window-bg; // Same as window background
+  position: relative;
+  overflow: hidden;
+}
+
+.earthCanvas {
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  canvas {
+    display: block;
+  }
+}
+
+.earthInfo {
+  color: $macos9-text-color;
+  font-family: $macos9-font;
+  font-size: 0.75em;
+  text-align: center;
+  padding: 8px 16px;
+  background: $macos9-window-bg;
+  border-bottom: 1px solid #ccc;
+}
+
+// Remove stars background for monochromatic look

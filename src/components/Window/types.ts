@@ -7,5 +7,7 @@ export interface WindowProps {
   onFocus: () => void;
   isActive: boolean;
   initialPosition?: { x: number; y: number };
+  initialSize?: { width: number; height: number };
   zIndex?: number;
+  disableResize?: boolean;
 }

@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/three": "^0.179.0",
     "classnames": "^2.5.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sass": "^1.90.0"
+    "sass": "^1.90.0",
+    "three": "^0.179.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

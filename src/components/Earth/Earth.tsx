@@ -10,7 +10,9 @@ const Earth: React.FC = () => {
   const animationIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!mountRef.current || mountRef.current.children.length > 0) return; // Prevent double mounting
+    if (!mountRef.current || mountRef.current.children.length > 0) {
+      return;
+    }
 
     const currentMount = mountRef.current; // Store ref for cleanup
 
@@ -118,7 +120,7 @@ const Earth: React.FC = () => {
       event.preventDefault();
       const scale = event.deltaY > 0 ? 0.9 : 1.1;
       camera.position.z *= scale;
-      camera.position.z = Math.max(1.5, Math.min(10, camera.position.z));
+      camera.position.z = Math.max(0.8, Math.min(10, camera.position.z));
     };
 
     renderer.domElement.addEventListener("mousedown", handleMouseDown);

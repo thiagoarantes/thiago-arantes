@@ -4,7 +4,7 @@
   position: absolute;
   border: 1px solid $macos9-window-border;
   background-color: $macos9-window-bg;
-  box-shadow: 4px 4px 0 rgb(43, 43, 43);
+  box-shadow: 2px 2px 0 rgb(43, 43, 43);
   min-width: 250px;
   min-height: 20px;
   z-index: 10;
@@ -18,7 +18,7 @@
   }
 
   &.inactive {
-    box-shadow: 4px 4px 0 rgba(43, 43, 43, 0.5);
+    box-shadow: 2px 2px 0 rgba(43, 43, 43, 0.5);
     border: 1px solid rgba(43, 43, 43, 0.5);
     resize: none;
 

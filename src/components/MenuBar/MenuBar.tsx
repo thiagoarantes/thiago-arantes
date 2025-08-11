@@ -5,24 +5,39 @@ import type { MenuBarProps } from "./types";
 import cn from "classnames";
 
 const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
-  const [time, setTime] = useState("");
+  const [timeToDisplay, setTimeToDisplay] = useState("");
+  const [dateToDisplay, setDateToDisplay] = useState("");
+  const [isDisplayingTime, setIsDisplayingTime] = useState(true);
   const { showMessage } = useAppContext();
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const tickTime = setInterval(() => {
       const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-        formatMatcher: "basic",
-      };
 
-      setTime(now.toLocaleTimeString("en-US", options));
+      setTimeToDisplay(
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+          formatMatcher: "basic",
+        })
+      );
+
+      setDateToDisplay(
+        now.toLocaleDateString("en-US", {
+          month: "numeric",
+          day: "numeric",
+          year: "2-digit",
+        })
+      );
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(tickTime);
   }, []);
+
+  const toggleTime = () => {
+    setIsDisplayingTime((current) => !current);
+  };
 
   return (
     <div className={styles.menuBar}>
@@ -105,8 +120,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
         </div>
       </div>
       <div className={styles.menuItemSpacer}></div>
-      <div className={styles.menuItem} id="time-display">
-        {time}
+      <div id="time-display" onClick={toggleTime}>
+        {isDisplayingTime ? timeToDisplay : dateToDisplay}
       </div>
     </div>
   );

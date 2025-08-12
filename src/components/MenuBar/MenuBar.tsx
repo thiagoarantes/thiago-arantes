@@ -8,6 +8,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
   const [timeToDisplay, setTimeToDisplay] = useState("");
   const [dateToDisplay, setDateToDisplay] = useState("");
   const [isDisplayingTime, setIsDisplayingTime] = useState(true);
+  const [showControlPanelsSubmenu, setShowControlPanelsSubmenu] =
+    useState(false);
   const { showMessage } = useAppContext();
 
   useEffect(() => {
@@ -43,6 +45,36 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
     <div className={styles.menuBar}>
       <div className={cn(styles.menuItem, styles.appleLogo)}>
         <img src="/assets/icons/apple-logo.png" alt="Apple Logo" />
+        <div className={styles.dropdownContent}>
+          <a href="#" onClick={() => onMenuClick("apple", "about")}>
+            About This Mac
+          </a>
+          <hr className={styles.menuSeparator} />
+          <div
+            className={cn(styles.submenuParent)}
+            onMouseEnter={() => setShowControlPanelsSubmenu(true)}
+            onMouseLeave={() => setShowControlPanelsSubmenu(false)}
+          >
+            <img
+              src="/assets/icons/control-panel.png"
+              alt="Control Panels"
+              className={styles.menuIcon}
+            />
+            Control Panels
+            <img
+              src="/assets/arrow.png"
+              alt=">"
+              className={styles.submenuArrow}
+            />
+            {showControlPanelsSubmenu && (
+              <div className={styles.submenu}>
+                <a href="#" onClick={() => onMenuClick("apple", "appearance")}>
+                  Appearance
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
       <div className={styles.menuItem}>
         File
@@ -108,9 +140,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
       <div className={styles.menuItem}>
         Help
         <div className={styles.dropdownContent}>
-          <a href="#" onClick={() => onMenuClick("help", "about")}>
-            About This Mac
-          </a>
           <a
             href="#"
             onClick={() => showMessage("Help topics are not implemented yet.")}

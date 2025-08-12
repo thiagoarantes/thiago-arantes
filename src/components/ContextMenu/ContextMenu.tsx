@@ -1,5 +1,4 @@
-import { forwardRef, useState } from "react";
-import cn from "classnames";
+import { forwardRef } from "react";
 import { useAppContext } from "../../hooks/useAppContext";
 import AboutMe from "../AboutMe/AboutMe";
 import Projects from "../Projects/Projects";
@@ -8,38 +7,13 @@ import styles from "./ContextMenu.module.scss";
 import type { ContextMenuProps } from "./types";
 import MyComputer from "../MyComputer/MyComputer";
 
-// Color palette based on the attached image
-const colorPalette = [
-  "#BA5B5B",
-  "#FF7B43",
-  "#FFBF43",
-  "#9BBA5B",
-  "#9BBA5B",
-  "#5BBA6B",
-  "#5C9B8A",
-  "#5B8B7B",
-  "#4A7C59",
-  "#BA7B5B",
-  "#8B6B47",
-  "#BA5BBA",
-  "#5B5BBA",
-  "#5B7BBA",
-  "#CCCCFF",
-  "#4B7BFF",
-  "#43BFFF",
-  "#5B84BA",
-  "#BA9B5B",
-  "#666666",
-  "#000000",
-];
-
 const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
   ({ x, y, onClose, orderIconsByName }, ref) => {
-    const { openWindow, setBackgroundColor, backgroundColor } = useAppContext();
-    const [showColorSubmenu, setShowColorSubmenu] = useState(false);
+    const { openWindow } = useAppContext();
 
     const handleOpen = (type: string) => {
       onClose();
+
       switch (type) {
         case "my-computer":
           openWindow(
@@ -76,10 +50,6 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
         default:
           break;
       }
-    };
-
-    const handleColorSelect = (color: string) => {
-      setBackgroundColor(color);
     };
 
     return (
@@ -123,43 +93,6 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
           }}
         >
           Order Icons by Name
-        </div>
-        <hr className={styles.contextMenuHr} />
-        <div
-          className={cn(styles.contextMenuItem, styles.submenuParent)}
-          onMouseEnter={() => setShowColorSubmenu(true)}
-          onMouseLeave={() => setShowColorSubmenu(false)}
-        >
-          Background Color
-          <img
-            src="/assets/arrow.png"
-            alt=">"
-            className={styles.submenuArrow}
-          />
-          {showColorSubmenu && (
-            <div className={styles.colorSubmenu}>
-              <div className={styles.colorGrid}>
-                {colorPalette.map((color, index) => (
-                  <div
-                    key={index}
-                    className={cn(styles.colorSwatch, {
-                      [styles.selectedColor]: color === backgroundColor,
-                    })}
-                    style={{ backgroundColor: color }}
-                    onClick={() => handleColorSelect(color)}
-                    title={color}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-        <hr className={styles.contextMenuHr} />
-        <div
-          className={styles.contextMenuItem}
-          onClick={() => handleOpen("about")}
-        >
-          About This Mac
         </div>
       </div>
     );

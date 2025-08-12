@@ -1,0 +1,62 @@
+@use "../../styles/variables.scss" as *;
+
+$color-grid-size: 60px;
+
+.appearance {
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+
+  h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  h3 {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0 0 15px 0;
+    font-size: 0.9em;
+    color: $macos9-text-color;
+  }
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, $color-grid-size);
+  gap: 8px;
+  width: fit-content;
+  border: 1px solid $macos9-separator-color;
+  padding: 12px;
+  background-color: $macos9-window-bg;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.colorSwatch {
+  width: $color-grid-size;
+  height: calc($color-grid-size / 3);
+  border: 1px solid #000;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.1s ease;
+
+  &:hover {
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #000, inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  &.selectedColor {
+    border: 2px solid #000;
+    box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000,
+      inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+  }
+}

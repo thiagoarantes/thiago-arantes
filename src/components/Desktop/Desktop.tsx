@@ -6,6 +6,7 @@ import ContactMe from "../ContactMe/ContactMe";
 import MyComputer from "../MyComputer/MyComputer";
 import MenuBar from "../MenuBar/MenuBar";
 import Help from "../Help/Help";
+import Appearance from "../Appearance/Appearance";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import Earth from "../Earth/Earth";
 import { useAppContext } from "../../hooks/useAppContext";
@@ -214,13 +215,16 @@ const Desktop: React.FC = () => {
     if (menu === "edit" && item === "paste") {
       showMessage("Paste functionality is not implemented yet.");
     }
-    if (menu === "help" && item === "about") {
+    if (menu === "apple" && item === "about") {
       openWindow(
-        "help",
+        "about-this-mac",
         "About This Mac",
         <Help />,
-        "/assets/icons/finder.png"
+        "/assets/icons/apple-logo.png"
       );
+    }
+    if (menu === "apple" && item === "appearance") {
+      openWindow("appearance", "Appearance", <Appearance />);
     }
     if (menu === "help" && item === "topics") {
       showMessage("Help topics are not implemented yet.");

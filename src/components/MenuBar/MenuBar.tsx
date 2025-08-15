@@ -10,7 +10,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
   const [isDisplayingTime, setIsDisplayingTime] = useState(true);
   const [showControlPanelsSubmenu, setShowControlPanelsSubmenu] =
     useState(false);
-  const { showMessage } = useAppContext();
+  const [showWindowsDropdown, setShowWindowsDropdown] = useState(false);
+  const { showMessage, activeWindow, allWindows, focusWindow } =
+    useAppContext();
 
   useEffect(() => {
     const tickTime = setInterval(() => {
@@ -36,6 +38,21 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
 
     return () => clearInterval(tickTime);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest(`.${styles.windowTitleSection}`)) {
+        setShowWindowsDropdown(false);
+      }
+    };
+
+    if (showWindowsDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [showWindowsDropdown]);
 
   const toggleTime = () => {
     setIsDisplayingTime((current) => !current);
@@ -151,6 +168,68 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
       <div className={styles.menuItemSpacer}></div>
       <div id="time-display" onClick={toggleTime}>
         {isDisplayingTime ? timeToDisplay : dateToDisplay}
+      </div>
+      <div className={styles.windowTitleSection}>
+        <div className={styles.separator}></div>
+        <div
+          className={cn(styles.windowTitle, {
+            [styles.activeMenuTitle]: showWindowsDropdown,
+          })}
+          onClick={() => setShowWindowsDropdown(!showWindowsDropdown)}
+        >
+          {activeWindow ? (
+            <>
+              {activeWindow.icon && (
+                <img
+                  src={activeWindow.icon}
+                  alt=""
+                  className={styles.windowIcon}
+                />
+              )}
+              <span>{activeWindow.title}</span>
+            </>
+          ) : (
+            <>
+              <img
+                src="/assets/icons/finder.png"
+                alt=""
+                className={styles.windowIcon}
+              />
+              <span>Finder</span>
+            </>
+          )}
+          {showWindowsDropdown && allWindows.length > 0 && (
+            <div className={styles.windowsDropdown}>
+              {allWindows.map((window) => (
+                <a
+                  key={window.id}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    focusWindow(window.id);
+                    setShowWindowsDropdown(false);
+                  }}
+                >
+                  <div className={styles.checkmarkContainer}>
+                    {window.id === activeWindow?.id ? (
+                      <img
+                        src="/assets/checkmark.png"
+                        alt="✓"
+                        className={styles.checkmark}
+                      />
+                    ) : (
+                      <div className={styles.checkmarkSpacer}></div>
+                    )}
+                  </div>
+                  {window.icon && (
+                    <img src={window.icon} alt="" className={styles.menuIcon} />
+                  )}
+                  {window.title}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

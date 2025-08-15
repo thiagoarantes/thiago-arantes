@@ -127,7 +127,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <AppContext.Provider
-      value={{ openWindow, showMessage, setBackgroundColor, backgroundColor }}
+      value={{
+        openWindow,
+        showMessage,
+        setBackgroundColor,
+        backgroundColor,
+        activeWindow: windows.find((w) => w.id === activeWindow) || null,
+        allWindows: windows,
+        focusWindow,
+      }}
     >
       {children}
       {windows.map((win) => (

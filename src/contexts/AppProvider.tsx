@@ -24,9 +24,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       id: string,
       title: string,
       content: React.ReactNode,
-      icon?: string,
-      size?: { width: number; height: number },
-      disableResize?: boolean
+      options?: {
+        icon?: string;
+        size?: { width: number; height: number };
+        disableResize?: boolean;
+      }
     ) => {
       if (windows.find((w) => w.id === id)) {
         // If window already exists, bring it to front and make it active
@@ -43,8 +45,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const menuBarHeight = 24;
-      const initialWidth = size?.width || 500;
-      const initialHeight = size?.height || 350;
+      const initialWidth = options?.size?.width || 500;
+      const initialHeight = options?.size?.height || 350;
 
       let posX = Math.random() * (viewportWidth - initialWidth - 40) + 20;
       let posY =
@@ -67,11 +69,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
           id,
           title,
           content,
-          icon,
+          icon: options?.icon,
           position: { x: posX, y: posY },
           size: { width: initialWidth, height: initialHeight },
           zIndex: newZIndex,
-          disableResize,
+          disableResize: options?.disableResize,
         },
       ]);
       setActiveWindow(id);
@@ -117,12 +119,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     if (!hasOpenedInitialWindow.current) {
       hasOpenedInitialWindow.current = true;
-      openWindow(
-        "about-me",
-        "About Me",
-        <AboutMe />,
-        "/assets/icons/profile.png"
-      );
+      openWindow("about-me", "About Me", <AboutMe />, {
+        icon: "/assets/icons/profile.png",
+      });
     }
   }, [openWindow]);
 

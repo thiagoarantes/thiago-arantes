@@ -146,46 +146,31 @@ const Desktop: React.FC = () => {
   const handleIconDoubleClick = (id: string) => {
     switch (id) {
       case "about-me":
-        openWindow(
-          "about-me",
-          "About Me",
-          <AboutMe />,
-          "/assets/icons/profile.png"
-        );
+        openWindow("about-me", "About Me", <AboutMe />, {
+          icon: "/assets/icons/profile.png",
+        });
         break;
       case "projects":
-        openWindow(
-          "projects",
-          "My Projects",
-          <Projects />,
-          "/assets/icons/projects.png"
-        );
+        openWindow("projects", "My Projects", <Projects />, {
+          icon: "/assets/icons/projects.png",
+        });
         break;
       case "contact-me":
-        openWindow(
-          "contact-me",
-          "Contact Me",
-          <ContactMe />,
-          "/assets/icons/contact-me.png"
-        );
+        openWindow("contact-me", "Contact Me", <ContactMe />, {
+          icon: "/assets/icons/contact-me.png",
+        });
         break;
       case "my-computer":
-        openWindow(
-          "my-computer",
-          "My Computer",
-          <MyComputer />,
-          "/assets/icons/my-computer.png"
-        );
+        openWindow("my-computer", "My Computer", <MyComputer />, {
+          icon: "/assets/icons/my-computer.png",
+        });
         break;
       case "earth":
-        openWindow(
-          "earth",
-          "Earth",
-          <Earth />,
-          "/assets/icons/earth.png",
-          { width: 650, height: 700 }, // Size to accommodate 650x650 canvas
-          true // Disable resize
-        );
+        openWindow("earth", "Earth", <Earth />, {
+          icon: "/assets/icons/earth.png",
+          size: { width: 650, height: 700 }, // Size to accommodate 650x650 canvas
+          disableResize: true, // Disable resize
+        });
         break;
       default:
         break;
@@ -216,15 +201,14 @@ const Desktop: React.FC = () => {
       showMessage("Paste functionality is not implemented yet.");
     }
     if (menu === "apple" && item === "about") {
-      openWindow(
-        "about-this-mac",
-        "About This Mac",
-        <Help />,
-        "/assets/icons/apple-logo.png"
-      );
+      openWindow("about-this-mac", "About This Mac", <Help />, {
+        icon: "/assets/icons/apple-logo.png",
+      });
     }
     if (menu === "apple" && item === "appearance") {
-      openWindow("appearance", "Appearance", <Appearance />);
+      openWindow("appearance", "Appearance", <Appearance />, {
+        disableResize: true,
+      });
     }
     if (menu === "help" && item === "topics") {
       showMessage("Help topics are not implemented yet.");

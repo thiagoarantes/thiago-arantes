@@ -1,62 +1,210 @@
 @use "../../styles/variables.scss" as *;
 
-$color-grid-size: 60px;
-
 .appearance {
-  padding: 20px;
-  font-family: system-ui, -apple-system, sans-serif;
-
-  h2 {
-    margin: 0 0 20px 0;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-
-  h3 {
-    margin: 0 0 10px 0;
-    font-size: 1em;
-    font-weight: bold;
-  }
-
-  p {
-    margin: 0 0 15px 0;
-    font-size: 0.9em;
-    color: $macos9-text-color;
-  }
-}
-
-.section {
-  margin-bottom: 30px;
-}
-
-.colorGrid {
-  display: grid;
-  grid-template-columns: repeat(3, $color-grid-size);
-  gap: 8px;
-  width: fit-content;
-  border: 1px solid $macos9-separator-color;
-  padding: 12px;
+  font-family: $macos9-font;
+  font-size: 11px;
   background-color: $macos9-window-bg;
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// Tab Bar Styling
+.tabBar {
+  display: flex;
+  border-bottom: 1px solid $macos9-separator-color;
+  background-color: $macos9-window-bg;
+  padding: 4px 8px 0 8px;
+}
+
+.tab {
+  padding: 4px 12px;
+  margin-right: 2px;
+  border: 1px solid $macos9-separator-color;
+  border-bottom: none;
+  background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+  font-family: $macos9-font;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+
+  &:hover {
+    background: linear-gradient(to bottom, #ffffff, #e8e8e8);
+  }
+
+  &.activeTab {
+    background: $macos9-window-bg;
+    border-bottom: 1px solid $macos9-window-bg;
+    margin-bottom: -1px;
+    z-index: 1;
+    position: relative;
+  }
+}
+
+// Tab Content
+.tabContent {
+  flex: 1;
+  padding: 16px;
+  background-color: $macos9-window-bg;
+}
+
+.tabPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: $macos9-separator-color;
+  font-style: italic;
+}
+
+// Desktop Tab Styling
+.desktopTab {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.desktopContent {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.leftSection {
+  flex: 1;
+}
+
+.rightSection {
+  width: 180px;
+}
+
+.sectionLabel {
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 11px;
+}
+
+// Patterns List
+.patternSection {
+  margin-bottom: 16px;
+}
+
+.patternList {
+  border: 1px solid $macos9-separator-color;
+  background-color: white;
+  height: 120px;
+  overflow-y: auto;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.patternItem {
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: #e6e6ff;
+  }
+
+  &.selectedPattern {
+    background-color: #0000aa;
+    color: white;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .colorSwatch {
-  width: $color-grid-size;
-  height: calc($color-grid-size / 3);
-  border: 1px solid #000;
+  width: 16px;
+  height: 16px;
+  border: 1px solid $macos9-separator-color;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+// Pattern Info
+.patternInfo {
+  font-size: 9px;
+  color: $macos9-text-color;
+}
+
+.infoText {
+  margin-bottom: 2px;
+}
+
+// Picture Section
+.pictureSection {
+  margin-bottom: 16px;
+}
+
+.placePictureButton {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid $macos9-separator-color;
+  background: linear-gradient(to bottom, #f8f8f8, #d8d8d8);
+  font-family: $macos9-font;
+  font-size: 11px;
   cursor: pointer;
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
-  transition: all 0.1s ease;
+  border-radius: 3px;
 
   &:hover {
-    border: 1px solid #fff;
-    box-shadow: 0 0 0 1px #000, inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
   }
 
-  &.selectedColor {
-    border: 2px solid #000;
-    box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000,
-      inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+  &:active {
+    background: linear-gradient(to bottom, #d8d8d8, #f8f8f8);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Position Section
+.positionSection {
+  margin-bottom: 16px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.checkbox {
+  margin-right: 6px;
+  transform: scale(0.9);
+}
+
+// Bottom Section
+.bottomSection {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid $macos9-separator-color;
+}
+
+.setDesktopButton {
+  padding: 6px 16px;
+  border: 1px solid $macos9-separator-color;
+  background: linear-gradient(to bottom, #f8f8f8, #d8d8d8);
+  font-family: $macos9-font;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+
+  &:hover {
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  }
+
+  &:active {
+    background: linear-gradient(to bottom, #d8d8d8, #f8f8f8);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 }

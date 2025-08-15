@@ -14,9 +14,11 @@ export interface AppContextType {
     id: string,
     title: string,
     content: React.ReactNode,
-    icon?: string,
-    size?: { width: number; height: number },
-    disableResize?: boolean
+    options?: {
+      icon?: string;
+      size?: { width: number; height: number };
+      disableResize?: boolean;
+    }
   ) => void;
   showMessage: (message: string) => void;
   setBackgroundColor: (color: string) => void;

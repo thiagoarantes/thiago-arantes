@@ -16,36 +16,24 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
 
       switch (type) {
         case "my-computer":
-          openWindow(
-            "my-computer",
-            "My Computer",
-            <MyComputer />,
-            "/assets/icons/my-computer.png"
-          );
+          openWindow("my-computer", "My Computer", <MyComputer />, {
+            icon: "/assets/icons/my-computer.png",
+          });
           break;
         case "about":
-          openWindow(
-            "about-me",
-            "About Me",
-            <AboutMe />,
-            "/assets/icons/profile.png"
-          );
+          openWindow("about-me", "About Me", <AboutMe />, {
+            icon: "/assets/icons/profile.png",
+          });
           break;
         case "projects":
-          openWindow(
-            "projects",
-            "My Projects",
-            <Projects />,
-            "/assets/icons/projects.png"
-          );
+          openWindow("projects", "My Projects", <Projects />, {
+            icon: "/assets/icons/projects.png",
+          });
           break;
         case "contact":
-          openWindow(
-            "contact-me",
-            "Contact Me",
-            <ContactMe />,
-            "/assets/icons/contact-me.png"
-          );
+          openWindow("contact-me", "Contact Me", <ContactMe />, {
+            icon: "/assets/icons/contact-me.png",
+          });
           break;
         default:
           break;

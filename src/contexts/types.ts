@@ -22,7 +22,9 @@ export interface AppContextType {
   ) => void;
   showMessage: (message: string) => void;
   setBackgroundColor: (color: string) => void;
+  setBackgroundImage: (image: string) => void;
   backgroundColor: string;
+  backgroundImage: string;
   activeWindow: AppWindow | null;
   allWindows: AppWindow[];
   focusWindow: (id: string) => void;

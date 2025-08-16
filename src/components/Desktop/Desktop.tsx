@@ -207,6 +207,7 @@ const Desktop: React.FC = () => {
     }
     if (menu === "apple" && item === "appearance") {
       openWindow("appearance", "Appearance", <Appearance />, {
+        size: { width: 500, height: 377 },
         disableResize: true,
       });
     }

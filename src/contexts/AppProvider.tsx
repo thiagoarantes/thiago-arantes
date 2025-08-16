@@ -17,6 +17,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     "macos9-background-color",
     "#ccccff"
   ); // Persisted background color
+  const [backgroundImage, setBackgroundImage] = useLocalStorage(
+    "macos9-background-image",
+    ""
+  ); // Persisted background image
   const hasOpenedInitialWindow = useRef(false);
 
   const openWindow = useCallback(
@@ -110,10 +114,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     setMessageBox(null);
   };
 
-  // Apply background color to body element
+  // Apply background color and image to body element
   useEffect(() => {
-    document.body.style.backgroundColor = backgroundColor;
-  }, [backgroundColor]);
+    if (backgroundImage && backgroundImage.trim() !== "") {
+      document.body.style.backgroundImage = `url(${backgroundImage})`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundColor = "#000000"; // Fallback color
+    } else {
+      document.body.style.backgroundImage = "";
+      document.body.style.backgroundColor = backgroundColor;
+    }
+  }, [backgroundColor, backgroundImage]);
 
   // Open About Me window on app load (only once)
   useEffect(() => {
@@ -131,7 +144,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         openWindow,
         showMessage,
         setBackgroundColor,
+        setBackgroundImage,
         backgroundColor,
+        backgroundImage,
         activeWindow: windows.find((w) => w.id === activeWindow) || null,
         allWindows: windows,
         focusWindow,

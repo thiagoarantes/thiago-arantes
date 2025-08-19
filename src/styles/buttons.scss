@@ -2,10 +2,7 @@
 
 .button {
   background-color: $macos9-button-bg;
-  border-top: 1px solid $macos9-button-bevel-light;
-  border-left: 1px solid $macos9-button-bevel-light;
-  border-right: 1px solid $macos9-button-bevel-dark;
-  border-bottom: 1px solid $macos9-button-bevel-dark;
+  border: 1px solid $macos9-button-border;
   padding: 5px 12px;
   font-family: $macos9-font;
   font-size: 1em;
@@ -14,12 +11,12 @@
   box-sizing: border-box;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
   border-radius: 3px;
+  box-shadow: inset -1px 0 0 rgb(109, 109, 109),
+    inset -2px -1px 0 rgb(173, 173, 173), inset 1px 0 0 rgb(255, 255, 255),
+    inset 2px 1px 0 rgb(230, 230, 230);
 
   &:active {
-    border-top: 1px solid $macos9-button-bevel-dark;
-    border-left: 1px solid $macos9-button-bevel-dark;
-    border-right: 1px solid $macos9-button-bevel-light;
-    border-bottom: 1px solid $macos9-button-bevel-light;
+    border: 1px solid $macos9-button-border;
     background-color: $macos9-button-bg;
     transform: translateY(1px);
   }

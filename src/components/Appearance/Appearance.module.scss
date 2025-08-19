@@ -1,4 +1,5 @@
 @use "../../styles/variables.scss" as *;
+@use "../../styles/buttons.scss" as *;
 
 .appearance {
   font-family: $macos9-font;
@@ -180,24 +181,4 @@
   justify-content: flex-end;
   padding-top: 16px;
   border-top: 1px solid $macos9-separator-color;
-}
-
-.setDesktopButton {
-  padding: 6px 16px;
-  border: 1px solid $macos9-separator-color;
-  background: linear-gradient(to bottom, #f8f8f8, #d8d8d8);
-  font-family: $macos9-font;
-  font-size: 11px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-weight: bold;
-
-  &:hover {
-    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  }
-
-  &:active {
-    background: linear-gradient(to bottom, #d8d8d8, #f8f8f8);
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
 }

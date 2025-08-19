@@ -36,7 +36,7 @@
     .windowTitlebar {
       background: none;
       color: $macos9-text-color;
-      border-bottom: 1px solid $macos9-button-bevel-dark;
+      border-bottom: 1px solid $macos9-button-border;
 
       .windowControlsLeft,
       .windowControlsRight {
@@ -52,7 +52,8 @@
 }
 
 .windowTitlebar {
-  background: url("/assets/window-title-bg.png") repeat-x center center;
+  background: url("/assets/window-title-bg.png") repeat-x center center,
+    $macos9-window-title-bg;
   box-shadow: inset -1px -1px 0 rgb(133, 133, 133);
   height: 19px;
   color: #000;
@@ -70,7 +71,7 @@
 
 .windowTitle {
   padding: 0 4px;
-  background-color: $macos9-window-bg;
+  background-color: $macos9-window-title-bg;
   margin: 0 auto;
 }
 
@@ -85,7 +86,7 @@
 .windowControlsRight {
   display: flex;
   gap: 2px;
-  background-color: $macos9-window-bg;
+  background-color: $macos9-window-title-bg;
   position: absolute;
 }
 

@@ -162,10 +162,7 @@ const Appearance: React.FC = () => {
           </div>
         </div>
         <div className={styles.bottomSection}>
-          <button
-            className={styles.setDesktopButton}
-            onClick={handleSetDesktop}
-          >
+          <button className={styles.button} onClick={handleSetDesktop}>
             Set Desktop
           </button>
         </div>

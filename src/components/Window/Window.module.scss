@@ -37,7 +37,6 @@
       background: none;
       color: $macos9-text-color;
       border-bottom: 1px solid $macos9-button-bevel-dark;
-      padding-right: 21px;
 
       .windowControlsLeft,
       .windowControlsRight {
@@ -66,11 +65,13 @@
   border-bottom: 1px solid $macos9-window-border;
   font-size: 1em;
   padding-right: 1px;
+  position: relative;
 }
 
 .windowTitle {
   padding: 0 4px;
   background-color: $macos9-window-bg;
+  margin: 0 auto;
 }
 
 .windowTitleIcon {
@@ -85,6 +86,7 @@
   display: flex;
   gap: 2px;
   background-color: $macos9-window-bg;
+  position: absolute;
 }
 
 .windowControlsLeft {
@@ -93,6 +95,7 @@
 
 .windowControlsRight {
   padding: 0 2px 0 6px;
+  right: 0;
 }
 
 .windowControlButton {

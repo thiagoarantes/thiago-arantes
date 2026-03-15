@@ -1,7 +1,14 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import styles from "./Window.module.scss";
 import type { WindowProps } from "./types";
 import cn from "classnames";
+import { GEOMETRY_KEY_PREFIX, loadSavedGeometry } from "./utils";
 
 const Window: React.FC<WindowProps> = ({
   id,
@@ -16,16 +23,22 @@ const Window: React.FC<WindowProps> = ({
   zIndex = 10,
   disableResize = false,
 }) => {
+  const saved = useMemo(() => loadSavedGeometry(id), [id]);
+
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState(initialPosition);
-  const [size, setSize] = useState(initialSize);
+  const [position, setPosition] = useState(
+    saved ? { x: saved.x, y: saved.y } : initialPosition,
+  );
+  const [size, setSize] = useState(
+    saved ? { width: saved.width, height: saved.height } : initialSize,
+  );
   const [isMaximized, setIsMaximized] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [originalState, setOriginalState] = useState({
-    x: initialPosition.x,
-    y: initialPosition.y,
-    width: initialSize.width,
-    height: initialSize.height,
+    x: saved?.x ?? initialPosition.x,
+    y: saved?.y ?? initialPosition.y,
+    width: saved?.width ?? initialSize.width,
+    height: saved?.height ?? initialSize.height,
   });
   const windowRef = useRef<HTMLDivElement>(null);
   const dragStartPos = useRef({ x: 0, y: 0 });
@@ -122,7 +135,7 @@ const Window: React.FC<WindowProps> = ({
         setPosition({ x: newX, y: newY });
       }
     },
-    [isDragging]
+    [isDragging],
   );
 
   const handleMouseUp = () => {
@@ -175,6 +188,37 @@ const Window: React.FC<WindowProps> = ({
       document.removeEventListener("mouseup", handleMouseUp);
     };
   }, [handleMouseMove, isDragging]);
+
+  // Persist window geometry to localStorage (debounced, skip maximized/minimized)
+  useEffect(() => {
+    if (isMaximized || isMinimized) return;
+
+    const timeoutId = setTimeout(() => {
+      try {
+        localStorage.setItem(
+          `${GEOMETRY_KEY_PREFIX}${id}`,
+          JSON.stringify({
+            x: position.x,
+            y: position.y,
+            width: size.width,
+            height: size.height,
+          }),
+        );
+      } catch {
+        /* ignore quota errors */
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [
+    id,
+    position.x,
+    position.y,
+    size.width,
+    size.height,
+    isMaximized,
+    isMinimized,
+  ]);
 
   return (
     <div

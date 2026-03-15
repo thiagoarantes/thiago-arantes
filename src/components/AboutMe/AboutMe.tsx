@@ -2,21 +2,7 @@ import React, { useState } from "react";
 import styles from "./AboutMe.module.scss";
 import cn from "classnames";
 import { asset } from "../../utils/asset";
-
-const BOOKMARKS = [
-  {
-    id: "linkedin",
-    label: "LinkedIn",
-    url: "https://www.linkedin.com/in/thiagoarantes/",
-  },
-  {
-    id: "github",
-    label: "GitHub",
-    url: "https://github.com/thiagoarantes",
-  },
-] as const;
-
-type PageId = (typeof BOOKMARKS)[number]["id"];
+import { BOOKMARKS, GITHUB_REPOS, LANGUAGE_COLORS, type PageId } from "./types";
 
 const AboutMe: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>("linkedin");
@@ -83,7 +69,6 @@ const AboutMe: React.FC = () => {
           </button>
         </div>
       </div>
-
       <div className={styles.body}>
         <div className={styles.bookmarksPanel}>
           <div className={styles.bookmarksHeader}>Bookmarks</div>
@@ -102,13 +87,11 @@ const AboutMe: React.FC = () => {
             ))}
           </ul>
         </div>
-
         <div className={styles.content}>
           {activePage === "linkedin" && <LinkedInPage />}
           {activePage === "github" && <GitHubPage />}
         </div>
       </div>
-
       <div className={styles.statusBar}>
         <span className={styles.statusText}>Done</span>
         <span className={styles.statusZone}>Internet</span>
@@ -135,7 +118,6 @@ const LinkedInPage: React.FC = () => (
         </div>
       </div>
     </div>
-
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>About</h3>
       <p>
@@ -145,7 +127,6 @@ const LinkedInPage: React.FC = () => (
         right now.
       </p>
     </div>
-
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Languages</h3>
       <ul className={styles.infoList}>
@@ -163,7 +144,6 @@ const LinkedInPage: React.FC = () => (
         </li>
       </ul>
     </div>
-
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Certifications</h3>
       <ul className={styles.infoList}>
@@ -176,7 +156,6 @@ const LinkedInPage: React.FC = () => (
         </li>
       </ul>
     </div>
-
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Honors &amp; Awards</h3>
       <ul className={styles.infoList}>
@@ -190,7 +169,6 @@ const LinkedInPage: React.FC = () => (
         </li>
       </ul>
     </div>
-
     <div className={styles.pageFooter}>
       <a
         href="https://www.linkedin.com/in/thiagoarantes/"
@@ -202,52 +180,6 @@ const LinkedInPage: React.FC = () => (
     </div>
   </div>
 );
-
-const GITHUB_REPOS = [
-  {
-    name: "tindermon",
-    description: "Tinder like application with Pokemon Theme",
-    language: "TypeScript",
-  },
-  {
-    name: "nuns",
-    description: "Novice Log Sheet for Nuns on the Run board game",
-    language: "CSS",
-  },
-  {
-    name: "json2tree",
-    description:
-      "React App that converts JSON and JS arrays into visual TreeView components",
-    language: "TypeScript",
-  },
-  {
-    name: "teacherSheet",
-    description: "Sheet for oral exam correction in English courses",
-    language: "Vue",
-  },
-  {
-    name: "hackerNews",
-    description: "Simple version of Hacker News tool using Angular 19",
-    language: "TypeScript",
-  },
-  {
-    name: "pokemon-battle",
-    description: "React 19 app to simulate a simple Pokemon Battle",
-    language: "TypeScript",
-  },
-  {
-    name: "thiago-arantes",
-    description:
-      "Personal Website for Thiago Arantes (this one your looking at 👀)",
-    language: "TypeScript",
-  },
-];
-
-const LANGUAGE_COLORS: Record<string, string> = {
-  TypeScript: "#3178c6",
-  CSS: "#563d7c",
-  Vue: "#41b883",
-};
 
 const GitHubPage: React.FC = () => (
   <div className={styles.githubPage}>
@@ -264,7 +196,6 @@ const GitHubPage: React.FC = () => (
         </p>
       </div>
     </div>
-
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Popular repositories</h3>
       <div className={styles.ghRepoGrid}>
@@ -292,7 +223,6 @@ const GitHubPage: React.FC = () => (
         ))}
       </div>
     </div>
-
     <div className={styles.pageFooter}>
       <a
         href="https://github.com/thiagoarantes"

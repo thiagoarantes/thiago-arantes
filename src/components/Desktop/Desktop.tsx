@@ -12,6 +12,7 @@ import Earth from "../Earth/Earth";
 import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./Desktop.module.scss";
 import type { DesktopIcon as DesktopIconType } from "./types";
+import { asset } from "../../utils/asset";
 
 const Desktop: React.FC = () => {
   const { openWindow, showMessage } = useAppContext();
@@ -40,35 +41,35 @@ const Desktop: React.FC = () => {
   const [desktopIcons, setDesktopIcons] = useState<DesktopIconType[]>([
     {
       id: "my-computer",
-      icon: "/assets/icons/my-computer.png",
+      icon: asset("/assets/icons/my-computer.png"),
       label: "My Computer",
       top: 50,
       right: 20,
     },
     {
       id: "about-me",
-      icon: "/assets/icons/profile.png",
+      icon: asset("/assets/icons/profile.png"),
       label: "About Me",
       top: 150,
       right: 20,
     },
     {
       id: "projects",
-      icon: "/assets/icons/projects.png",
+      icon: asset("/assets/icons/projects.png"),
       label: "My Projects",
       top: 250,
       right: 20,
     },
     {
       id: "contact-me",
-      icon: "/assets/icons/contact-me.png",
+      icon: asset("/assets/icons/contact-me.png"),
       label: "Contact Me",
       top: 350,
       right: 20,
     },
     {
       id: "earth",
-      icon: "/assets/icons/earth.png",
+      icon: asset("/assets/icons/earth.png"),
       label: "Earth",
       top: 450,
       right: 20,
@@ -147,28 +148,28 @@ const Desktop: React.FC = () => {
     switch (id) {
       case "about-me":
         openWindow("about-me", "About Me", <AboutMe />, {
-          icon: "/assets/icons/profile.png",
+          icon: asset("/assets/icons/profile.png"),
           size: { width: 550, height: 500 },
         });
         break;
       case "projects":
         openWindow("projects", "My Projects", <Projects />, {
-          icon: "/assets/icons/projects.png",
+          icon: asset("/assets/icons/projects.png"),
         });
         break;
       case "contact-me":
         openWindow("contact-me", "Contact Me", <ContactMe />, {
-          icon: "/assets/icons/contact-me.png",
+          icon: asset("/assets/icons/contact-me.png"),
         });
         break;
       case "my-computer":
         openWindow("my-computer", "My Computer", <MyComputer />, {
-          icon: "/assets/icons/my-computer.png",
+          icon: asset("/assets/icons/my-computer.png"),
         });
         break;
       case "earth":
         openWindow("earth", "Earth", <Earth />, {
-          icon: "/assets/icons/earth.png",
+          icon: asset("/assets/icons/earth.png"),
           size: { width: 650, height: 700 }, // Size to accommodate 650x650 canvas
           disableResize: true, // Disable resize
         });
@@ -203,7 +204,7 @@ const Desktop: React.FC = () => {
     }
     if (menu === "apple" && item === "about") {
       openWindow("about-this-mac", "About This Mac", <Help />, {
-        icon: "/assets/icons/apple-logo.png",
+        icon: asset("/assets/icons/apple-logo.png"),
       });
     }
     if (menu === "apple" && item === "appearance") {

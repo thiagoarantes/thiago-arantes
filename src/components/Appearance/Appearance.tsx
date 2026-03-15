@@ -3,37 +3,38 @@ import cn from "classnames";
 import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./Appearance.module.scss";
 import type { TabName } from "./types";
+import { asset } from "../../utils/asset";
 
 const colorPatterns = [
   { name: "Azul Dark", color: "#4169E1" },
   { name: "Azul Extra Light", color: "#E6F3FF" },
   { name: "Azul Light", color: "#ccccff" },
-  { name: "Blue Dalmatian", image: "/assets/wallpapers/blue-dalmatian.png" },
+  { name: "Blue Dalmatian", image: asset("/assets/wallpapers/blue-dalmatian.png") },
   { name: "Blueberry", color: "#6495ED" },
   {
     name: "Blueberry Oxigen",
-    image: "/assets/wallpapers/blueberry-oxigen.png",
+    image: asset("/assets/wallpapers/blueberry-oxigen.png"),
   },
-  { name: "Blueberry Union", image: "/assets/wallpapers/blueberry-union.png" },
+  { name: "Blueberry Union", image: asset("/assets/wallpapers/blueberry-union.png") },
   { name: "Bondi", color: "#0BB5FF" },
   { name: "Bondi Dark", color: "#0080C7" },
   { name: "Bondi Extra Dark", color: "#003F7F" },
   { name: "Bondi Light", color: "#87CEEB" },
-  { name: "Capsules", image: "/assets/wallpapers/capsules.png" },
-  { name: "Default", image: "/assets/wallpapers/default.png" },
+  { name: "Capsules", image: asset("/assets/wallpapers/capsules.png") },
+  { name: "Default", image: asset("/assets/wallpapers/default.png") },
   { name: "Forest Green", color: "#228B22" },
   { name: "Graphite", color: "#696969" },
   { name: "Green Apple", color: "#8DB600" },
-  { name: "Heavy Petal", image: "/assets/wallpapers/heavy-petal.png" },
-  { name: "Indigo Foam", image: "/assets/wallpapers/indigo-foam.png" },
+  { name: "Heavy Petal", image: asset("/assets/wallpapers/heavy-petal.png") },
+  { name: "Indigo Foam", image: asset("/assets/wallpapers/indigo-foam.png") },
   { name: "Jade", color: "#00A86B" },
   { name: "Lime", color: "#32CD32" },
-  { name: "MacOS", image: "/assets/wallpapers/macos.png" },
+  { name: "MacOS", image: asset("/assets/wallpapers/macos.png") },
   { name: "Mint", color: "#98FB98" },
   { name: "Orange", color: "#FF8C00" },
   { name: "Pine", color: "#01796F" },
   { name: "Purple", color: "#9370DB" },
-  { name: "Quantum Foam", image: "/assets/wallpapers/quantum-foam.png" },
+  { name: "Quantum Foam", image: asset("/assets/wallpapers/quantum-foam.png") },
   { name: "Red", color: "#DC143C" },
   { name: "Sage", color: "#9CAF88" },
   { name: "Sea Green", color: "#2E8B57" },
@@ -43,10 +44,10 @@ const colorPatterns = [
   { name: "Tangerine", color: "#FF7F50" },
   {
     name: "Tangerine Fusion",
-    image: "/assets/wallpapers/tangerine-fusion.png",
+    image: asset("/assets/wallpapers/tangerine-fusion.png"),
   },
-  { name: "Tub", image: "/assets/wallpapers/tub.png" },
-  { name: "UFO", image: "/assets/wallpapers/ufo.png" },
+  { name: "Tub", image: asset("/assets/wallpapers/tub.png") },
+  { name: "UFO", image: asset("/assets/wallpapers/ufo.png") },
 ];
 
 const Appearance: React.FC = () => {

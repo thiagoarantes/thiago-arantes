@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ContactMe.module.scss";
+import { asset } from "../../utils/asset";
 
 const SOCIAL_LINKS = [
   {
@@ -8,7 +9,7 @@ const SOCIAL_LINKS = [
     href: "mailto:thiagoarantes@gmail.com",
     icon: (
       <img
-        src={"/assets/icons/email.png"}
+        src={asset("/assets/icons/email.png")}
         alt="Email"
         aria-hidden="true"
         tabIndex={-1}
@@ -22,7 +23,7 @@ const SOCIAL_LINKS = [
     href: "https://www.instagram.com/thiagoarantes",
     icon: (
       <img
-        src={"/assets/icons/instagram.png"}
+        src={asset("/assets/icons/instagram.png")}
         alt="Instagram"
         aria-hidden="true"
         tabIndex={-1}
@@ -36,7 +37,7 @@ const SOCIAL_LINKS = [
     href: "https://www.linkedin.com/in/thiagoarantes/",
     icon: (
       <img
-        src={"/assets/icons/linkedin.png"}
+        src={asset("/assets/icons/linkedin.png")}
         alt="LinkedIn"
         aria-hidden="true"
         tabIndex={-1}
@@ -50,7 +51,7 @@ const SOCIAL_LINKS = [
     href: "https://github.com/thiagoarantes",
     icon: (
       <img
-        src={"/assets/icons/github.png"}
+        src={asset("/assets/icons/github.png")}
         alt="GitHub"
         aria-hidden="true"
         tabIndex={-1}

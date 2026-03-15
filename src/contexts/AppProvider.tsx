@@ -5,6 +5,7 @@ import MessageBox from "../components/MessageBox/MessageBox";
 import Window from "../components/Window/Window";
 import AboutMe from "../components/AboutMe/AboutMe";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { asset } from "../utils/asset";
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -133,7 +134,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     if (!hasOpenedInitialWindow.current) {
       hasOpenedInitialWindow.current = true;
       openWindow("about-me", "About Me", <AboutMe />, {
-        icon: "/assets/icons/profile.png",
+        icon: asset("/assets/icons/profile.png"),
         size: { width: 550, height: 500 },
       });
     }

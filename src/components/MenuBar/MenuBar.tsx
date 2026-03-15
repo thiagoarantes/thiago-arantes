@@ -3,6 +3,7 @@ import { useAppContext } from "../../hooks/useAppContext";
 import styles from "./MenuBar.module.scss";
 import type { MenuBarProps } from "./types";
 import cn from "classnames";
+import { asset } from "../../utils/asset";
 
 const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
   const [timeToDisplay, setTimeToDisplay] = useState("");
@@ -61,7 +62,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
   return (
     <div className={styles.menuBar}>
       <div className={cn(styles.menuItem, styles.appleLogo)}>
-        <img src="/assets/icons/apple-logo.png" alt="Apple Logo" />
+        <img src={asset("/assets/icons/apple-logo.png")} alt="Apple Logo" />
         <div className={styles.dropdownContent}>
           <a href="#" onClick={() => onMenuClick("apple", "about")}>
             About This Mac
@@ -73,13 +74,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
             onMouseLeave={() => setShowControlPanelsSubmenu(false)}
           >
             <img
-              src="/assets/icons/control-panel.png"
+              src={asset("/assets/icons/control-panel.png")}
               alt="Control Panels"
               className={styles.menuIcon}
             />
             Control Panels
             <img
-              src="/assets/arrow.png"
+              src={asset("/assets/arrow.png")}
               alt=">"
               className={styles.submenuArrow}
             />
@@ -191,7 +192,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
           ) : (
             <>
               <img
-                src="/assets/icons/finder.png"
+                src={asset("/assets/icons/finder.png")}
                 alt=""
                 className={styles.windowIcon}
               />
@@ -213,7 +214,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ onMenuClick }) => {
                   <div className={styles.checkmarkContainer}>
                     {window.id === activeWindow?.id ? (
                       <img
-                        src="/assets/checkmark.png"
+                        src={asset("/assets/checkmark.png")}
                         alt="✓"
                         className={styles.checkmark}
                       />

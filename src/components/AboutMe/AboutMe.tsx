@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AboutMe.module.scss";
 import cn from "classnames";
+import { asset } from "../../utils/asset";
 
 const BOOKMARKS = [
   {
@@ -19,7 +20,7 @@ type PageId = (typeof BOOKMARKS)[number]["id"];
 
 const AboutMe: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>("linkedin");
-  const [url, setUrl] = useState(BOOKMARKS[0].url);
+  const [url, setUrl] = useState<string>(BOOKMARKS[0].url);
 
   const navigateTo = (id: PageId) => {
     const bookmark = BOOKMARKS.find((b) => b.id === id);
@@ -65,7 +66,7 @@ const AboutMe: React.FC = () => {
           <div className={styles.addressInputWrapper}>
             <img
               className={styles.addressFavicon}
-              src="/assets/icons/earth.png"
+              src={asset("/assets/icons/earth.png")}
               alt=""
             />
             <input
@@ -122,7 +123,7 @@ const LinkedInPage: React.FC = () => (
       <div className={styles.profileCover} />
       <div className={styles.profileInfo}>
         <div className={styles.profileAvatar}>
-          <img src="/assets/icons/profile.png" alt="Thiago Arantes" />
+          <img src={asset("/assets/icons/profile.png")} alt="Thiago Arantes" />
         </div>
         <div className={styles.profileDetails}>
           <h2 className={styles.profileName}>Thiago Arantes</h2>
@@ -252,7 +253,7 @@ const GitHubPage: React.FC = () => (
   <div className={styles.githubPage}>
     <div className={styles.ghHeader}>
       <div className={styles.ghAvatar}>
-        <img src="/assets/icons/profile.png" alt="Thiago Arantes" />
+        <img src={asset("/assets/icons/profile.png")} alt="Thiago Arantes" />
       </div>
       <div className={styles.ghUserInfo}>
         <h2 className={styles.ghDisplayName}>Thiago Arantes</h2>

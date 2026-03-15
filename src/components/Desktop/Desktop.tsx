@@ -148,6 +148,7 @@ const Desktop: React.FC = () => {
       case "about-me":
         openWindow("about-me", "About Me", <AboutMe />, {
           icon: "/assets/icons/profile.png",
+          size: { width: 550, height: 500 },
         });
         break;
       case "projects":

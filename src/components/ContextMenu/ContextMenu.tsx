@@ -23,6 +23,7 @@ const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
         case "about":
           openWindow("about-me", "About Me", <AboutMe />, {
             icon: "/assets/icons/profile.png",
+            size: { width: 550, height: 500 },
           });
           break;
         case "projects":

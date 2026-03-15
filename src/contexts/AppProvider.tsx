@@ -134,6 +134,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       hasOpenedInitialWindow.current = true;
       openWindow("about-me", "About Me", <AboutMe />, {
         icon: "/assets/icons/profile.png",
+        size: { width: 550, height: 500 },
       });
     }
   }, [openWindow]);

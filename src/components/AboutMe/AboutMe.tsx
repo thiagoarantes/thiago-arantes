@@ -129,9 +129,7 @@ const LinkedInPage: React.FC = () => (
           <p className={styles.profileHeadline}>
             Front End Developer — Making the web awesome
           </p>
-          <p className={styles.profileLocation}>
-            Pierrefonds, Quebec, Canada
-          </p>
+          <p className={styles.profileLocation}>Pierrefonds, Quebec, Canada</p>
           <p className={styles.profileCompany}>Autodesk</p>
         </div>
       </div>
@@ -234,6 +232,12 @@ const GITHUB_REPOS = [
   {
     name: "pokemon-battle",
     description: "React 19 app to simulate a simple Pokemon Battle",
+    language: "TypeScript",
+  },
+  {
+    name: "thiago-arantes",
+    description:
+      "Personal Website for Thiago Arantes (this one your looking at 👀)",
     language: "TypeScript",
   },
 ];
